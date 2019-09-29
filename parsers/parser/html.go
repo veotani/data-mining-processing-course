@@ -13,9 +13,8 @@ type Post struct {
 }
 
 // Parse returns all apmath faculty web-site posts as text
-func Parse() []*Post {
-	fmt.Println("Extracting news:")
-	elements := extractNewsElements("http://apmath.spbu.ru/")
+func Parse(url string) []*Post {
+	elements := extractNewsElements(url)
 	posts := elementsToPosts(elements)
 	return posts
 }
