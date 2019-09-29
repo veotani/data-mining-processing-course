@@ -5,6 +5,10 @@ import (
 	"testing"
 )
 
+func TestStudentsTableParsing(t *testing.T) {
+	p := Parser{"../data/test_case.doc"}
+	p.ExtractStudents()
+}
 func TestDocumentParsing(t *testing.T) {
 	p := Parser{"../data/test.doc"}
 	text, err := p.ExtractAllText()
