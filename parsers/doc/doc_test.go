@@ -7,7 +7,29 @@ import (
 
 func TestStudentsTableParsing(t *testing.T) {
 	p := Parser{"../data/test_case.doc"}
-	p.ExtractStudents()
+	students, err := p.ExtractStudents()
+
+	if err != nil {
+		t.Error(err)
+	}
+
+	if !strings.Contains(students[1], "Абдуллина Диана Марселевна") {
+		t.Errorf("first student had to be \"Абдуллина Диана Марселевна\" but got \"%v\"", students[1])
+	}
+
+	if !strings.Contains(students[len(students)-1], "Ярославцев Владислав Сергеевич") {
+		t.Errorf(
+			"first student had to be \"Ярославцев Владислав Сергеевич\" but got \"%v\"",
+			students[len(students)-1],
+		)
+	}
+
+	if len(students) != 64+1 {
+		t.Errorf(
+			"invalid number of students: %v, had to be 64+1 (because of first line which is header",
+			len(students),
+		)
+	}
 }
 func TestDocumentParsing(t *testing.T) {
 	p := Parser{"../data/test.doc"}
