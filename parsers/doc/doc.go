@@ -1,9 +1,7 @@
 package doc
 
 import (
-	"errors"
 	"os"
-	"strings"
 
 	"code.sajari.com/docconv"
 )
@@ -13,8 +11,8 @@ type Parser struct {
 	FilePath string // file to parse
 }
 
-// ExtractAllText extracts all text from file by it's file path
-func (d *Parser) ExtractAllText() (string, error) {
+// GetText extracts all text from given doc file
+func (d *Parser) GetText() (string, error) {
 	file, err := os.Open(d.FilePath)
 	if err != nil {
 		return "", err
@@ -27,35 +25,16 @@ func (d *Parser) ExtractAllText() (string, error) {
 	return content, nil
 }
 
-// ExtractStudents parses doc file with table and extracts student names
-func (d *Parser) ExtractStudents() ([]string, error) {
-	text, err := d.ExtractAllText()
+// GetMeta extracts metadata of the doc file
+func (d *Parser) GetMeta() (map[string]string, error) {
+	file, err := os.Open(d.FilePath)
 	if err != nil {
 		return nil, err
 	}
+	_, meta, err := docconv.ConvertDoc(file)
 
-	lines := strings.Split(text, "\n")
-	names := make([]string, 0)
-
-	firstNameLineNumber := -1
-
-	for lineNumber, line := range lines {
-		if strings.Contains(line, "Фамилия, Имя, Отчество") {
-			firstNameLineNumber = lineNumber
-			break
-		}
+	if err != nil {
+		return nil, err
 	}
-
-	if firstNameLineNumber == -1 {
-		return nil, errors.New("cant find name line")
-	}
-
-	currentNameLineNumber := firstNameLineNumber
-
-	for currentNameLineNumber < len(lines) && len(lines[currentNameLineNumber]) >= 6 {
-		names = append(names, lines[currentNameLineNumber])
-		currentNameLineNumber += 6
-	}
-
-	return names, nil
+	return meta, nil
 }
