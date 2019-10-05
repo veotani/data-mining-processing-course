@@ -1,0 +1,7 @@
+language: go
+
+services:
+  - docker
+
+script: 
+  - docker build -t veotani/data-mining-processing-course/parsers .
