@@ -4,4 +4,5 @@ services:
   - docker
 
 script: 
+  - cd parsers
   - docker build -t veotani/data-mining-processing-course/parsers .
