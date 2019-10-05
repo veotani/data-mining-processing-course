@@ -3,15 +3,22 @@ package main
 import (
 	"fmt"
 
-	"github.com/veotani/data-mining-processing-course/parsers/doc"
+	"github.com/veotani/data-mining-processing-course/parsers/docx"
 )
 
 func main() {
-	p := doc.Parser{FilePath: "data/test.doc"}
-	text, err := p.ExtractAllText()
+	parser := docx.Parser{FileName: "data/test.docx"}
+	text, err := parser.GetText()
 	if err != nil {
 		fmt.Println(err)
 	}
 
 	fmt.Println(text)
+
+	meta, err := parser.GetMeta()
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	fmt.Println(meta)
 }
