@@ -8,12 +8,12 @@ import (
 
 // Parser parses doc file
 type Parser struct {
-	FilePath string // file to parse
+	FileName string // file to parse
 }
 
 // GetText extracts all text from given doc file
 func (d *Parser) GetText() (string, error) {
-	file, err := os.Open(d.FilePath)
+	file, err := os.Open(d.FileName)
 	if err != nil {
 		return "", err
 	}
@@ -27,7 +27,7 @@ func (d *Parser) GetText() (string, error) {
 
 // GetMeta extracts metadata of the doc file
 func (d *Parser) GetMeta() (map[string]string, error) {
-	file, err := os.Open(d.FilePath)
+	file, err := os.Open(d.FileName)
 	if err != nil {
 		return nil, err
 	}
