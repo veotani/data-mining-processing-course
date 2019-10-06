@@ -6,7 +6,7 @@ import (
 )
 
 func TestEmptyFile(t *testing.T) {
-	parser := Parser{FileName: "../data/empty.doc"}
+	parser := Parser{FileName: "../data/empty.pdf"}
 	text, err := parser.GetText()
 	if err != nil {
 		t.Error(err)
@@ -31,7 +31,7 @@ func TestInvalidFileName(t *testing.T) {
 }
 
 func TestInvalidFileFormat(t *testing.T) {
-	parser := Parser{FileName: "../data/invalid_doc.doc"}
+	parser := Parser{FileName: "../data/invalid_pdf.pdf"}
 	_, err := parser.GetText()
 	if err == nil {
 		t.Error("must throw error")
@@ -41,7 +41,7 @@ func TestInvalidFileFormat(t *testing.T) {
 func TestSimpleFile(t *testing.T) {
 	mustBePhrase := "test-test-test"
 
-	parser := Parser{FileName: "../data/simple.doc"}
+	parser := Parser{FileName: "../data/simple.pdf"}
 	text, err := parser.GetText()
 	if err != nil {
 		t.Error(err)
@@ -58,7 +58,7 @@ func TestSimpleFile(t *testing.T) {
 }
 
 func TestEmptyFileMeta(t *testing.T) {
-	parser := Parser{FileName: "../data/empty.doc"}
+	parser := Parser{FileName: "../data/empty.pdf"}
 	meta, err := parser.GetMeta()
 	if err != nil {
 		t.Error(err)
@@ -69,7 +69,7 @@ func TestEmptyFileMeta(t *testing.T) {
 }
 
 func TestInvalidFileFormatMeta(t *testing.T) {
-	parser := Parser{FileName: "../data/invalid_doc.doc"}
+	parser := Parser{FileName: "../data/invalid_pdf.pdf"}
 	_, err := parser.GetMeta()
 	if err == nil {
 		t.Error("must throw error")
