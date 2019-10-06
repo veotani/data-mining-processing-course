@@ -63,8 +63,13 @@ func TestEmptyFileMeta(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	if len(meta) != 0 {
-		t.Error("there should be no meta")
+	size, ok := meta["File size"]
+	if !ok {
+		t.Error("file size not found")
+	}
+
+	if size != "25681 bytes" {
+		t.Errorf("invalid size: %v", size)
 	}
 }
 
